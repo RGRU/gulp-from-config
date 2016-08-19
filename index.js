@@ -204,7 +204,7 @@ function createSubTask(subTaskName, subTask, taskName, taskCompletion) {
         watchTaks = [];
 
     if (!subTask.browserify && typeof subTask.watch !== "undefined") {
-        
+
         setWatch(subTaskName, subTaskWatch, subTask);
         watchTaks.push(subTaskWatch);
     }
@@ -257,7 +257,9 @@ function prepareSrc(srcPaths) {
 
             srcPaths.exclude.forEach(function (path) {
 
-                src.push('!' + rootPath + path);
+                // Возможность использовать относительный путь
+                //src.push('!' + rootPath + path);
+                src.push('!.' + path);
             });
         }
     }
@@ -532,7 +534,9 @@ function setFullPaths(paths) {
 
         paths.forEach(function(path) {
 
-            _paths.push(rootPath + path);
+            // Возможность использовать относительный путь
+            //_paths.push(rootPath + path);
+            _paths.push('.' + path);
         });
     }
 
@@ -865,7 +869,7 @@ function getConfigs(configsPath) {
         files.forEach(function(file) {
 
             var config = getConfigFromFile(file);
-            
+
             if(config) {
 
                 configs.push(config);
