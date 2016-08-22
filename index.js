@@ -259,7 +259,7 @@ function prepareSrc(srcPaths) {
 
                 // Возможность использовать относительный путь
                 //src.push('!' + rootPath + path);
-                src.push('!.' + path);
+                src.push('!' + path);
             });
         }
     }
@@ -536,7 +536,7 @@ function setFullPaths(paths) {
 
             // Возможность использовать относительный путь
             //_paths.push(rootPath + path);
-            _paths.push('.' + path);
+            _paths.push(path);
         });
     }
 
