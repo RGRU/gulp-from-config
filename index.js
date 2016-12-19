@@ -322,7 +322,7 @@ function setBrowserify(srcPaths, subTask, taskName, dest) {
             debug: true,
             cache: {},
             packageCache: {},
-            fullPaths: true
+            fullPaths: false // скрываем абсолютные пути в require
         };
 
         b = browserify(opt);
