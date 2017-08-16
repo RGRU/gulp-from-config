@@ -226,6 +226,7 @@ function createSubTask(subTaskName, subTask, taskName, taskCompletion) {
             task = setPipes(task, subTask.plugins, subTask.sourcemaps);
 
             task = task.pipe(gulp.dest(dest));
+
         }
 
         if(taskCompletion) {
@@ -587,6 +588,7 @@ function setSourceMaps(task, sourcemaps, plugins) {
 
     task = setPlugins(task, plugins);
 
+
     if(pipe) {
         task = task.pipe(pipe.write('./maps'));
 
@@ -609,10 +611,11 @@ function setPlugins(task, plugins) {
 
         gutil.colors.yellow('no options');
 
-        var pipe = pluginExist(plugin.name);
+        var sourcePlugin = pluginExist(plugin.name);
 
-        if(pipe) {
-            task = task.pipe(pipe(plugin.options));
+        if(sourcePlugin) {
+
+            task = task.pipe(sourcePlugin(plugin.options));
 
             gutil.log('Plugin:',
                 gutil.colors.green(plugin.name),
@@ -645,15 +648,17 @@ function pluginExist(pluginName) {
 }
 
 /**
- * Get list of all *.json config files
+ * Get list of all *.json and *.js config files
  * @access private
  * @param {String} configsPath
  * @returns {Array}
  */
 function getConfigFiles(configsPath) {
 
-    var files = glob.sync(configsPath + '/**/*.json');
+    var files = glob.sync(configsPath + '/**/*.{json,js}');
+
     return files;
+
 }
 
 /**
@@ -729,11 +734,13 @@ function setConfigs(configs, env) {
                 return false;
             }
 
+
             _configs.push(setConfigEnvironment(config, env));
 
             return true;
 
         });
+
 
         return _configs;
     } else {
@@ -863,6 +870,7 @@ function getConfigs(configsPath) {
     var configs = [],
         configsPath = configsPath ? path.join(rootPath, configsPath) : path.join(rootPath, 'configs'),
         files = getConfigFiles(configsPath);
+
 
     if(Array.isArray(files) && files.length) {
 
