@@ -1,4 +1,4 @@
-# gulp-from-config
+# gulp-from-config - NOT USED see custom build [gulp-from-config-rg](https://github.com/RGRU/gulp-from-config-rg)
 
 **`gulp-from-config`** provides ability to run gulp tasks from configs.
 
